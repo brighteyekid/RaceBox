@@ -1,73 +1,12 @@
-ESP8266 Telemetry Dashboard Wiring Diagram
-===========================================
-
-NodeMCU v2 (ESP8266) Pinout:
-                     ┌─────────────────────┐
-                     │                     │
-                     │    NodeMCU v2       │
-                     │    ESP8266-12E      │
-                     │                     │
-                 A0  │ 1               30  │ D0 (GPIO16)
-                RSV  │ 2               29  │ D1 (GPIO5) ──── SDA (OLED)
-                RSV  │ 3               28  │ D2 (GPIO4) ──── SCL (OLED)
-                SD3  │ 4               27  │ D3 (GPIO0)
-                SD2  │ 5               26  │ D4 (GPIO2)
-                SD1  │ 6               25  │ 3V3 ──────────── VCC (OLED)
-                CMD  │ 7               24  │ GND ──────────── GND (OLED)
-                SD0  │ 8               23  │ D5 (GPIO14) ─── NEXT Button
-                CLK  │ 9               22  │ D6 (GPIO12) ─── SELECT Button
-                GND  │10               21  │ D7 (GPIO13)
-                3V3  │11               20  │ D8 (GPIO15)
-                 EN  │12               19  │ D9 (GPIO3)
-                RST  │13               18  │ D10 (GPIO1)
-                GND  │14               17  │ D11 (GPIO9)
-                VIN  │15               16  │ D12 (GPIO10)
-                     │                     │
-                     └─────────────────────┘
+ESP8266 Telemetry Dashboard - Pin Mapping
+=======================================
 
 OLED Display (SSD1306 128x32):
-┌─────────────────┐
-│     OLED        │
-│   128 x 32      │
-│                 │
-│  GND VCC SCL SDA│
-└──┬───┬───┬───┬──┘
-   │   │   │   │
-   │   │   │   └── D1/GPIO5 (SDA)
-   │   │   └────── D2/GPIO4 (SCL)
-   │   └────────── 3.3V
-   └────────────── GND
+- VCC  → ESP8266 3.3V
+- GND  → ESP8266 GND
+- SCL  → ESP8266 D1 (GPIO5)
+- SDA  → ESP8266 D2 (GPIO4)
 
 Buttons:
-                    ┌─── 3.3V
-                    │
-                   ┌┴┐ 10kΩ (optional, ESP8266 has internal pullup)
-                   └┬┘
-    D5/GPIO14 ──────┼─── NEXT Button ─── GND
-                    
-                    ┌─── 3.3V
-                    │
-                   ┌┴┐ 10kΩ (optional, ESP8266 has internal pullup)
-                   └┬┘
-    D6/GPIO12 ──────┼─── SELECT Button ─── GND
-
-Complete Wiring:
-================
-
-NodeMCU Pin  →    Component
------------        ---------
-D1 (GPIO5)   →    OLED SDA
-D2 (GPIO4)   →    OLED SCL
-3V3          →    OLED VCC
-GND          →    OLED GND
-
-D5 (GPIO14)  →    NEXT Button (other side to GND)
-D6 (GPIO12)  →    SELECT Button (other side to GND)
-
-Notes:
-- Internal pull-up resistors are enabled in software
-- External 10kΩ pull-up resistors are optional but recommended for noise immunity
-- Use short wires for I2C connections (< 20cm)
-- Ensure good power supply (USB or external 3.3V)
-- ESP8266 is more sensitive to power issues than ESP32
-- Double-check connections before powering on
+- NEXT    → ESP8266 D5 (GPIO14) → GND
+- SELECT  → ESP8266 D6 (GPIO12) → GND
